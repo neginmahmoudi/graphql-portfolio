@@ -25,7 +25,10 @@ const profileQuery = gql`
 
 function App() {
   const locations=window.location.href.split("/");
-  const username= locations[locations.length-1];
+  let username= locations[locations.length-1];
+  if(username.length===0){
+    username=undefined;
+  }
   const { loading, error, data } = useQuery(profileQuery, { variables: {username:username} });
   if (loading) {
     return <h1>I am loading, wait</h1>;
